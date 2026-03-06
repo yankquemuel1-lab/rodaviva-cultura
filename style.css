@@ -226,6 +226,7 @@ h1, h2, h3, h4, .display {
 .nav-logo {
   font-family: var(--f-display);
   font-weight: 800;
+  white-space: nowrap;
   font-size: 1.2rem;
   color: var(--white);
   display: flex;
@@ -236,10 +237,12 @@ h1, h2, h3, h4, .display {
 .nav-cta {
   background: var(--orange);
   color: var(--white);
-  padding: 0.45rem 1.2rem;
+  padding: 0.28rem 0.85rem;
   border-radius: var(--r-pill);
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: background 0.18s, transform 0.18s;
 }
 .nav-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
@@ -274,9 +277,13 @@ h1, h2, h3, h4, .display {
 .hero-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
+  grid-template-rows: auto auto;
   gap: 2.5rem;
   align-items: center;
 }
+.hero-content--top    { grid-column: 1; grid-row: 1; }
+.hero-content--bottom { grid-column: 1; grid-row: 2; align-self: start; }
+.hero-img-wrap        { grid-column: 2; grid-row: 1 / span 2; }
 
 /* Left: copy */
 .hero-badge {
@@ -1163,16 +1170,29 @@ h1, h2, h3, h4, .display {
 /* ─────────────────────────────────────────
    RESPONSIVE
 ───────────────────────────────────────── */
+.hotmart-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.01em;
+}
+.hotmart-trust strong { color: rgba(255,255,255,0.85); }
+
 @media (max-width: 960px) {
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-rows: unset;
+    gap: 1.5rem;
     padding-bottom: 2rem;
   }
-  .hero-img-wrap {
-    justify-content: center;
-  }
-  .hero-img { max-height: 380px; border-radius: var(--r-md); }
+  .hero-content--top    { grid-column: unset; grid-row: unset; order: 1; }
+  .hero-img-wrap        { grid-column: unset; grid-row: unset; order: 2; justify-content: center; }
+  .hero-content--bottom { grid-column: unset; grid-row: unset; order: 3; align-self: unset; }
+  .hero-img { max-height: 340px; border-radius: var(--r-md); }
   .hero-cta-wrap { align-items: center; width: 100%; }
   .hero-sub { max-width: 100%; font-size: 1rem; }
   .hero-content { text-align: center; }
